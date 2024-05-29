@@ -42,6 +42,7 @@ http {
         }
     }
 
+<<<<<<< HEAD
     server { #admin
         listen 80;
         server_name admin.ulake.usth.edu.vn;
