@@ -32,7 +32,11 @@ class GreetingService {
     }
 
     String get(String key) {
-        return redisClient.get(key).toString();
+        long startTime = System.nanoTime();
+        String value = redisClient.get(key).toString();
+        long endTime = System.nanoTime();
+        System.out.println("Fetch time: " + (endTime - startTime) / 1_000_000 + " ms");
+        return value;
     }
 
     void set(String key, String value) {

@@ -99,4 +99,13 @@ http {
                 proxy_pass http://ulake-service-folder:8786;
             }
     }
+
+    server { # service core
+            listen 80;
+            server_name core.ulake.usth.edu.vn;
+            client_max_body_size 20000M;
+            location / {
+                proxy_pass http://ulake-service-core:8784;
+            }
+        }
 }

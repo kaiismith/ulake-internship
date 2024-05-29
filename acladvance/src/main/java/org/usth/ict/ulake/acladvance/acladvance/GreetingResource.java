@@ -36,9 +36,14 @@ public class GreetingResource {
 //    }
 
     public void getReactive(@Suspended AsyncResponse asyncResponse) {
+        long startTime = System.nanoTime();
         greetingService.getReactive()
                 .subscribe().with(
-                        result -> asyncResponse.resume(Response.ok(result).build()),
+                        result -> {
+                            long endTime = System.nanoTime();
+                            System.out.println("Fetch time: " + (endTime - startTime) / 1_000_000 + " ms");
+                            asyncResponse.resume(Response.ok(result).build());
+                        },
                         failure -> asyncResponse.resume(Response.serverError().entity(failure.getMessage()).build())
                 );
     }
